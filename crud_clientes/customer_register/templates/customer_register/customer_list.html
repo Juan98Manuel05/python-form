@@ -1,0 +1,42 @@
+{% extends "customer_register/base.html" %}
+
+{% block content %}
+<p> we'll show list of customer the table. </p>
+
+<table class="table table-borderless">
+    <thead class="border-bottom form-weight-bold">
+        <tr>
+            <td>Full Name</td>
+            <td>Mobile</td>
+            <td>Position</td>
+            <td>
+                <a href="{% url 'customer_insert' %}" class="btn btn-outline-success">
+                    <i class="fa fa-plus"></i> Add New 
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customer_list %}
+            <tr>
+                <td> {{ customer.fullname }} </td>
+                <td> {{ customer.mobile }} </td>
+                <td> {{ customer.position }} </td>
+                <td>
+                    <a href="{% url 'customer_update' customer.id %}" class="btn-text-secondary px-0">
+                        <i class="fa fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'customer_delete' customer.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="fa fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor%}
+
+    </tbody>
+</table>
+
+{% endblock content %}

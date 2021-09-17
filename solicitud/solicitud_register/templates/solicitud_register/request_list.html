@@ -1,0 +1,36 @@
+{% extends "solicitud_register/base.html "%}
+
+{% block content %}
+
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td> Empresa </td>
+            <td> Ciudad </td>
+            <td> Asunto </td>
+            <td>
+                <a href="{% url 'request_insert' %}" class="btn btn-outline-primary"> Add new </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in request_list %}
+            <tr>
+                <td>{{request.company}} </td>
+                <td>{{request.city}}</td>
+                <td>{{request.affair}} </td>
+                <td>
+                    <a href="{% url 'request_update' request.id %}" class="btn btn-primary">Edit</a>
+                    <form action="{% url 'request_delete' request.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            Del
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

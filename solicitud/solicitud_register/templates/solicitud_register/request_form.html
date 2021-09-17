@@ -1,0 +1,22 @@
+{% extends "solicitud_register/base.html "%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <div class="row mt-5">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-primary btn-block">
+                Enviar solicitud
+            </button>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'request_list' %}" class="btn btn-outline-primary btn-block">Solicitudes</a>            
+        </div>
+    </div>
+</form>
+
+{% endblock content %}
